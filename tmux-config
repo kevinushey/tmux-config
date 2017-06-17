@@ -93,8 +93,6 @@ process-line () {
 	*)
 		echo "[$I]: unrecognized directive '${DIRECTIVE}'"
 	esac
-
-	DOCUMENT+=("${LINE}")
 }
 
 # remove an old configuration file
