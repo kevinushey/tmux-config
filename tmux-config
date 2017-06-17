@@ -95,19 +95,14 @@ process-line () {
 	esac
 }
 
-# remove an old configuration file
-mkdir -p "$(dirname "${TMUX_CONFIG_OUTPUT}")"
-rm -f "${TMUX_CONFIG_OUTPUT}"
-
-# main engine -- read and process the file line-by-line
-declare -i I=1
-while IFS="" read -r LINE; do
-	process-line "${LINE}" "${I}"
-	I+=1
-done < "${TMUX_CONFIG_INPUT}"
-
-# write the document to file
-printf "%s\n" "${DOCUMENT[@]}" > "${TMUX_CONFIG_OUTPUT}"
+if [ "${TMUX_CONFIG_INPUT}" -nt "${TMUX_CONFIG_OUTPUT}" ]; then
+	declare -i I=1
+	while IFS="" read -r LINE; do
+		process-line "${LINE}" "${I}"
+		I+=1
+	done < "${TMUX_CONFIG_INPUT}"
+	printf "%s\n" "${DOCUMENT[@]}" > "${TMUX_CONFIG_OUTPUT}"
+fi
 
 # ask tmux to source the generated file
 tmux source-file "${TMUX_CONFIG_OUTPUT}"
