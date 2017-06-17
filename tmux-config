@@ -63,19 +63,25 @@ process-line () {
 
 	case "${DIRECTIVE}" in
 
-	# 'eval' statement: evaluate in current shell
+	# 'source': source a file
+	"source"*)
+		local STATEMENT="${DIRECTIVE/source /}"
+		eval ". ${STATEMENT}"
+	;;
+
+	# 'eval': evaluate in current shell
 	"eval"*)
 		local STATEMENT="${DIRECTIVE/eval /}"
 		eval "${STATEMENT}"
 	;;
 
-	# 'if' statement: evaluate and check return result
+	# 'if': evaluate and check return result
 	"if"*)
 		local STATEMENT="${DIRECTIVE/if /}"
 		eval "${STATEMENT}" &> /dev/null && STACK="${STACK}y" || STACK="${STACK}n"
 	;;
 
-	# 'else' statement: flip state
+	# 'else': flip state
 	"else"*)
 		case "${STACK}" in
 		*y) STACK="${STACK%?}n" ;;

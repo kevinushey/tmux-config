@@ -37,6 +37,7 @@ Currently, the following directives are understood by `tmux-config`:
 - `# @else`
 - `# @fi`
 - `# @eval [bash-statement]`
+- `# @source [bash-script]`
 
 When an `@if` directive is encountered, the following Bash snippet of code is
 evaluated, and the return status is used to choose whether any following tmux
@@ -44,7 +45,8 @@ configuration is added to the generated file. `@else` switches the condition
 from the previously encountered `@if`, and `@fi` closes the `@if` block.
 
 `@eval` is provided as a catch-all mechanism for defining your own Bash
-variables for use in later `@if` statements.
+variables for use in later `@if` statements. `@source` is used to source
+a Bash script.
 
 `tmux-config` provides the `TMUX_VERSION` environment variable for use in
 the `@if` directives.
