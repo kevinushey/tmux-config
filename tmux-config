@@ -117,6 +117,7 @@ if [ "${TMUX_CONFIG_INPUT}" -nt "${TMUX_CONFIG_OUTPUT}" ]; then
 		process-line "${LINE}" "${I}"
 		I+=1
 	done < "${TMUX_CONFIG_INPUT}"
+	mkdir -p "$(dirname "${TMUX_CONFIG_OUTPUT}")"
 	printf "%s\n" "${DOCUMENT[@]}" > "${TMUX_CONFIG_OUTPUT}"
 fi
 
