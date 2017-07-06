@@ -20,13 +20,11 @@ if [ "$1" = "--bootstrap" ]; then
 	EOF
 
 	# copy the tmux configuration script to requested path
-	if [ ! -f "${TMUX_CONFIG_PATH}" ]; then
-		mkdir -p "$(dirname "${TMUX_CONFIG_PATH}")"
-		cp "${TMUX_CONFIG_SOURCE}" "${TMUX_CONFIG_PATH}" || {
-			echo "Failed to copy tmux-config to '${TMUX_CONFIG_PATH}'"
-			exit 1
-		}
-	fi
+	mkdir -p "$(dirname "${TMUX_CONFIG_PATH}")"
+	cp "${TMUX_CONFIG_SOURCE}" "${TMUX_CONFIG_PATH}" || {
+		echo "Failed to copy tmux-config to '${TMUX_CONFIG_PATH}'"
+		exit 1
+	}
 
 	# if it looks like we've never added an autoloader, this is likely the
 	# user's own '.tmux.conf' file
