@@ -34,6 +34,7 @@ cd tmux-config && ./tmux-config --bootstrap
 Currently, the following directives are understood by `tmux-config`:
 
 - `# @if [bash-statement]`
+- `# @elif [bash-statement]`
 - `# @else`
 - `# @fi`
 - `# @eval [bash-statement]`

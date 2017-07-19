@@ -89,6 +89,12 @@ process-line () {
 		eval "${STATEMENT}" &> /dev/null && STACK="${STACK}y" || STACK="${STACK}n"
 	;;
 
+	# 'elif': evaluate and check return result
+	"elif"*)
+		local STATEMENT="${DIRECTIVE/elif /}"
+		eval "${STATEMENT}" &> /dev/null && STACK="${STACK%?}y" || STACK="${STACK%?n}"
+	;;
+
 	# 'else': flip state
 	"else"*)
 		case "${STACK}" in
