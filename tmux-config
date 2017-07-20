@@ -37,7 +37,10 @@ if [ "$1" = "--bootstrap" ]; then
 	echo "${LOADER}" > ~/.tmux.conf
 
 	echo "'tmux-config' successfully bootstrapped."
-	echo "Restart your tmux session to enable 'tmux-config'."
+
+	if [ -n "${TMUX}" ]; then
+		echo "Restart your tmux session to enable 'tmux-config'."
+	fi
 
 	exit 0
 
